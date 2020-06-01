@@ -1,7 +1,10 @@
 namespace avito
 {
 	public enum AppPages {
-		Main
+		Main,
+		Fav,
+		Sell,
+		Messages
 	}
 
 	public enum NavigationMode {

@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:avito.UI.Pages;assembly=avito"
              xmlns:controls="clr-namespace:avito.UI.Controls"
-			 x:Class="avito.UI.Pages.Main.MainPage"
-             Title="Поиск">
+			 x:Class="avito.UI.Pages.Fav.FavPage"
+             Title="Избранное">
     <ContentPage.Content>
 	    <controls:StateContainer State="{Binding State}">
 
@@ -14,32 +14,22 @@
 		    </controls:StateCondition>
 
 		    <controls:StateCondition State="Normal">
-			    <StackLayout>
+				<StackLayout>
 					<Entry Placeholder="Поиск в Воронеже" HorizontalOptions="FillAndExpand"/>
 					<ScrollView HorizontalScrollBarVisibility="Never" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+						
 						<StackLayout Orientation="Horizontal">
-							<Button ImageSource="icon.png"/>
-							<Button Text="Транспорт"/>
-							<Button Text="Недвижимость"/>
-							<Button Text="Работа"/>
-							<Button Text="Услуги"/>
-							<Button Text="Личные вещи"/>
-							<Button Text="Для дома и дачи"/>
-							<Button Text="Бытовая электроника"/>
+							
+							<Button Text="Объявления"/>
+							<Button Text="Поиски"/>
+							<Button Text="Продавцы"/>
+							
 						</StackLayout>
+						
 					</ScrollView>
-					<Label Text="{Binding SampleObject.Description}" 
-				           VerticalOptions="CenterAndExpand" 
-				           HorizontalOptions="CenterAndExpand"/>
-				    <Image HorizontalOptions="Center" VerticalOptions="Center"
-				           WidthRequest="300" HeightRequest="300"
-				           Source="{Binding SampleObject.ImageUrl}"/>
-					 <Button Text="Show Alert"
-							 Command="{Binding SampleCommand}"
-					           VerticalOptions="CenterAndExpand" 
-					           HorizontalOptions="CenterAndExpand"/>
-			    </StackLayout>
-		    </controls:StateCondition>
+					<Label Text="FastGrid"/>
+				</StackLayout>
+			</controls:StateCondition>
 
 		    <controls:StateCondition State="Error">
 			    <StackLayout>

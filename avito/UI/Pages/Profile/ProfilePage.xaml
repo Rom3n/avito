@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:avito.UI.Pages;assembly=avito"
+             xmlns:controls="clr-namespace:avito.UI.Controls"
+			 x:Class="avito.UI.Pages.Profile.ProfilePage"
+             Title="Профиль">
+    <ContentPage.Content>
+	    <controls:StateContainer State="{Binding State}">
+
+		    <controls:StateCondition State="Loading">
+			    <ActivityIndicator IsRunning="True" WidthRequest="40"
+			                       HorizontalOptions="Center" VerticalOptions="Center"/>
+		    </controls:StateCondition>
+
+		    <controls:StateCondition State="Normal">
+				<StackLayout>
+
+				</StackLayout>
+			</controls:StateCondition>
+
+		    <controls:StateCondition State="Error">
+			    <StackLayout>
+				    <Label Text="Ошибка загрузки данных" />
+			    </StackLayout>
+		    </controls:StateCondition>
+	    </controls:StateContainer>
+    </ContentPage.Content>
+</pages:BasePage>
