@@ -17,7 +17,7 @@ namespace avito
 
 		protected override void OnStart ()
 		{
-			NavigationService.Instance.SetMainPage(AppPages.Main);
+			NavigationService.Instance.SetMainTabbedPage(AppPages.Main, AppPages.Start, AppPages.Fav, AppPages.Sell, AppPages.Messages, AppPages.Profile);
 		}
 	}
 }

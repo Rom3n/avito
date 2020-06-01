@@ -5,7 +5,7 @@ using avito.DAL.DataServices;
 
 namespace avito.BL.ViewModels.Main
 {
-    public class MainViewModel: BaseViewModel
+    public class StartViewModel: BaseViewModel
     {
 		public SampleDataObject SampleObject {
 			get => Get<SampleDataObject>();

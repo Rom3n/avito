@@ -3,12 +3,11 @@ using System.Threading.Tasks;
 using avito.BL.ViewModels;
 using Xamarin.Forms;
 
-namespace avito.UI.Pages
-{
-	public class BasePage : ContentPage, IDisposable, IBasePage {
+namespace avito.UI.Pages {
+	public class BaseTabbedPage : TabbedPage, IDisposable, IBasePage {
 		protected BaseViewModel ViewModel => BindingContext as BaseViewModel;
 
-		~BasePage() {
+		~BaseTabbedPage() {
 			Dispose();
 		}
 
@@ -39,4 +38,3 @@ namespace avito.UI.Pages
 		}
 	}
 }
-

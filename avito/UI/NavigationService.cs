@@ -105,6 +105,32 @@ namespace avito.UI {
 			_isBusy = false;
 		}
 
+		public void SetMainTabbedPage(object page, params object[] subpageNames) {
+			if (_isBusy) return;
+			if (string.IsNullOrEmpty(page?.ToString())) throw new ArgumentNullException(nameof(page));
+
+			_isBusy = true;
+			var tabbedPage = GetInitializedPage(page.ToString()) as TabbedPage;
+
+			if (tabbedPage == null)
+				throw new ArgumentOutOfRangeException(nameof(page) + " is not TabbedPage");
+
+			foreach (var subpageName in subpageNames) {
+				var name = subpageName.ToString();
+				var subPage = GetInitializedPage(name);
+				tabbedPage.Children.Add(subPage);
+			}
+
+			var navigationPage = new NavigationPage(tabbedPage);
+			_app.MainPage = navigationPage;
+
+			DisposePages(_navigations.ToArray());
+
+			_navigations.Clear();
+			_navigations.Push(navigationPage.Navigation);
+			_isBusy = false;
+		}
+
 		void NavigationPushCallback(MessageBus bus, NavigationPushInfo navigationPushInfo) {
 			if (_isBusy) return;
 
@@ -291,7 +317,7 @@ namespace avito.UI {
 
 		static Dictionary<string, Type> GetAssemblyPageTypes() {
 			return typeof(BasePage).GetTypeInfo().Assembly.DefinedTypes
-				.Where(ti => ti.IsClass && !ti.IsAbstract && ti.Name.Contains(@"Page") && ti.BaseType.Name.Contains(nameof(BasePage)))
+				.Where(ti => ti.IsClass && !ti.IsAbstract && ti.Name.Contains(@"Page") && ti.BaseType.Name.StartsWith("Base"))
 				.ToDictionary(GetTypeBaseName, ti => ti.AsType());
 		}
 
@@ -309,7 +335,7 @@ namespace avito.UI {
 			bool withAnimation = true,
 			bool withBackButton = true,
 			string toTitle = null) {
-			var page = GetPage(toName);
+			var page = GetPage(toName) ?? (IBasePage)GetTabbedPage(toName);
 			var viewModel = GetViewModel(toName);
 			viewModel.SetNavigationParams(navParams);
 			page.SetViewModel(viewModel);
@@ -317,7 +343,7 @@ namespace avito.UI {
 			if (!string.IsNullOrEmpty(toTitle)) page.Title = toTitle;
 
 			return newNavigationStack
-				? new NavigationPage(page)
+				? new NavigationPage(page as Page)
 				: (Page) page;
 		}
 
@@ -335,6 +361,21 @@ namespace avito.UI {
 				var pageType = _pageTypes[pageName];
 				var pageObject = Activator.CreateInstance(pageType);
 				page = pageObject as BasePage;
+			}
+			catch (Exception e) {
+				throw new TypeLoadException($@"Unable create instance for {pageName}Page", e);
+			}
+
+			return page;
+		}
+
+		BaseTabbedPage GetTabbedPage(string pageName) {
+			if (!_pageTypes.ContainsKey(pageName)) throw new KeyNotFoundException($@"Page for {pageName} not found");
+			BaseTabbedPage page;
+			try {
+				var pageType = _pageTypes[pageName];
+				var pageObject = Activator.CreateInstance(pageType);
+				page = pageObject as BaseTabbedPage;
 			}
 			catch (Exception e) {
 				throw new TypeLoadException($@"Unable create instance for {pageName}Page", e);
