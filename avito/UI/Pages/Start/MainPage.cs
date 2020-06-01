@@ -6,7 +6,8 @@ namespace avito.UI.Pages.Start {
 		public MainPage() {
 			On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
 			On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(true);
-			On<Xamarin.Forms.PlatformConfiguration.Android>().SetBarItemColor(Color.MediumSpringGreen);
+			On<Xamarin.Forms.PlatformConfiguration.Android>().SetBarItemColor(Color.Blue);
+			
 		}
 
 		protected override void OnCurrentPageChanged() {

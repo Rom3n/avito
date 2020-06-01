@@ -4,6 +4,7 @@
              xmlns:pages="clr-namespace:avito.UI.Pages;assembly=avito"
              xmlns:controls="clr-namespace:avito.UI.Controls"
 			 x:Class="avito.UI.Pages.Fav.FavPage"
+			 IconImageSource="heart.png"
              Title="Избранное">
     <ContentPage.Content>
 	    <controls:StateContainer State="{Binding State}">

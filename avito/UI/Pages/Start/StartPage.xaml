@@ -4,6 +4,7 @@
              xmlns:pages="clr-namespace:avito.UI.Pages;assembly=avito"
              xmlns:controls="clr-namespace:avito.UI.Controls"
 			 x:Class="avito.UI.Pages.Start.StartPage"
+			 IconImageSource="avito.png"
              Title="Поиск">
 	
     <ContentPage.Content>

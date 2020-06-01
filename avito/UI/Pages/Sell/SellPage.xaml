@@ -4,6 +4,7 @@
              xmlns:pages="clr-namespace:avito.UI.Pages;assembly=avito"
              xmlns:controls="clr-namespace:avito.UI.Controls"
 			 x:Class="avito.UI.Pages.Sell.SellPage"
+			 IconImageSource="plus.png"
              Title="Разместить">
     <ContentPage.Content>
 	    <controls:StateContainer State="{Binding State}">
